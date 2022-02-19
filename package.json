@@ -2,9 +2,14 @@
   "name": "doit",
   "version": "1.0.0",
   "description": "A simple module for writing to-do applications in node",
-  "main": "index.js",
+  "files": [
+    "lib/**/*"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "keywords": [
     "todo"
@@ -12,6 +17,7 @@
   "author": "codingLogan",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "typescript": "^4.5.5"
   }
 }
