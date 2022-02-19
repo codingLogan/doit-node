@@ -1,0 +1,7 @@
+{
+  "transform": {
+    "^.+\\.(t|j)sx?$": "ts-jest"
+  },
+  "testPathIgnorePatterns": ["/node_modules/"],
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+}
