@@ -2,6 +2,6 @@
   "transform": {
     "^.+\\.(t|j)sx?$": "ts-jest"
   },
-  "testPathIgnorePatterns": ["/node_modules/"],
+  "testPathIgnorePatterns": ["/node_modules/", "/src/__tests__/repository.ts"],
   "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
 }
