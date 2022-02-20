@@ -9,7 +9,7 @@ export interface CreateListInputInterface {
 }
 
 /**
- * Upon creation it will be a named list, and defaults set up
+ * Upon creation it will be a named list, and an empty array of items
  */
 export interface CreateListOutputInterface {
   name: string;
@@ -21,9 +21,7 @@ export interface CreateListOutputInterface {
  * Expects: CreateListInput
  * Operates On: ToDoList entity
  * Returns: CreateListOutput
- * Repository: Operates with the abstract layer of the persistence layer
  */
-
 export class CreateListInteractor {
   createList(input: CreateListInputInterface) {
     const newList = new ToDoList(input.name);
