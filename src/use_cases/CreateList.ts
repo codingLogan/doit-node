@@ -9,19 +9,11 @@ export interface CreateListInputInterface {
 }
 
 /**
- * Upon return a list will also have an ID (provided by the Repository)
+ * Upon creation it will be a named list, and defaults set up
  */
 export interface CreateListOutputInterface {
   name: string;
-  id: string;
-}
-
-/**
- * This is to be implemented by the actual Repository layer
- * and it is used here
- */
-export interface CreateListRepositoryInterface {
-  createList(list: CreateListInputInterface): string;
+  items: [];
 }
 
 /**
@@ -33,22 +25,13 @@ export interface CreateListRepositoryInterface {
  */
 
 export class CreateListInteractor {
-  input: CreateListInputInterface;
-  repository: CreateListRepositoryInterface;
+  createList(input: CreateListInputInterface) {
+    const newList = new ToDoList(input.name);
 
-  constructor(
-    input: CreateListInputInterface,
-    repository: CreateListRepositoryInterface
-  ) {
-    this.input = input;
-    this.repository = repository;
-  }
-
-  execute() {
-    const returnedId = this.repository.createList(this.input);
-    let output: CreateListOutputInterface = {
-      name: this.input.name,
-      id: returnedId,
+    // Convert list to output
+    const output: CreateListOutputInterface = {
+      name: newList.name,
+      items: [],
     };
 
     return output;
