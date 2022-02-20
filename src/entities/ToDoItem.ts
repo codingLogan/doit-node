@@ -1,3 +1,8 @@
+export interface ToDoItemInterface {
+  name: string;
+  done: boolean;
+}
+
 export class ToDoItem {
   name: string;
   private done: boolean;
