@@ -12,8 +12,17 @@ export interface CreateListInputInterface {
  * Upon creation it will be a named list, and an empty array of items
  */
 export interface CreateListOutputInterface {
+  id: string | null;
   name: string;
   items: [];
+}
+
+/**
+ * a repository needs to implement an interface to save it
+ * Rather than rely on a specific db, it's abstract
+ */
+export interface CreateListRepositoryInterface {
+  createList(input: CreateListInputInterface): CreateListOutputInterface;
 }
 
 /**
@@ -23,11 +32,17 @@ export interface CreateListOutputInterface {
  * Returns: CreateListOutput
  */
 export class CreateListInteractor {
+  repo: CreateListRepositoryInterface;
+  constructor(repo: CreateListRepositoryInterface) {
+    this.repo = repo;
+  }
+
   createList(input: CreateListInputInterface) {
-    const newList = new ToDoList(input.name);
+    const newList = this.repo.createList(input);
 
     // Convert list to output
     const output: CreateListOutputInterface = {
+      id: newList.id,
       name: newList.name,
       items: [],
     };

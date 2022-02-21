@@ -1,5 +1,6 @@
 import {
   CreateListInputInterface,
+  CreateListOutputInterface,
   CreateListRepositoryInterface,
 } from "../use_cases/CreateList";
 
@@ -13,8 +14,25 @@ export class TestRepository implements CreateListRepositoryInterface {
     this.lists = [];
   }
 
-  createList(input: CreateListInputInterface) {
-    this.lists.push(input);
-    return (this.lists.length - 1).toString();
+  // Helper functions to help with setting "dummy" data
+  setLists(lists: []) {
+    this.lists = lists;
+  }
+
+  createList(input: CreateListInputInterface): CreateListOutputInterface {
+    const newList: CreateListOutputInterface = {
+      id: null,
+      name: input.name,
+      items: [],
+    };
+
+    this.lists.push(newList);
+    newList.id = this.lists.length.toString();
+
+    return {
+      id: this.lists.length.toString(),
+      name: input.name,
+      items: [],
+    };
   }
 }

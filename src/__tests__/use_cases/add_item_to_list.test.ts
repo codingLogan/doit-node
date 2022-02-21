@@ -12,27 +12,27 @@ test("create list and add an item to it", () => {
   expect(list.items.length).toBe(1);
 });
 
-test("AddItemInteractor can add items to a list", () => {
-  const list: AddItemInputInterface = {
-    list: {
-      name: "testlist",
-      items: [],
-    },
-    newItemName: "hello",
-  };
+// test("AddItemInteractor can add items to a list", () => {
+//   const list: AddItemInputInterface = {
+//     list: {
+//       name: "testlist",
+//       items: [],
+//     },
+//     newItemName: "hello",
+//   };
 
-  const expected: AddItemOutputInterface = {
-    list: {
-      name: "testlist",
-      items: [
-        {
-          name: "hello",
-          done: false,
-        },
-      ],
-    },
-  };
+//   const expected: AddItemOutputInterface = {
+//     list: {
+//       name: "testlist",
+//       items: [
+//         {
+//           name: "hello",
+//           done: false,
+//         },
+//       ],
+//     },
+//   };
 
-  const interactor = new AddItemInteractor(list);
-  expect(interactor.addItem()).toStrictEqual(expected);
-});
+//   const interactor = new AddItemInteractor(list);
+//   expect(interactor.addItem()).toStrictEqual(expected);
+// });
