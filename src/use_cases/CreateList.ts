@@ -38,12 +38,14 @@ export class CreateListInteractor {
   }
 
   createList(input: CreateListInputInterface) {
-    const newList = this.repo.createList(input);
+    // Use logic from the Entity to handle a bad list
+    const newList = new ToDoList(input.name);
+    const outputList = this.repo.createList({ name: newList.name });
 
     // Convert list to output
     const output: CreateListOutputInterface = {
-      id: newList.id,
-      name: newList.name,
+      id: outputList.id,
+      name: outputList.name,
       items: [],
     };
 
