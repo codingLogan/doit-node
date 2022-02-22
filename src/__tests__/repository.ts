@@ -3,19 +3,22 @@ import {
   CreateListOutputInterface,
   CreateListRepositoryInterface,
 } from "../use_cases/CreateList";
+import { GetListsRepository } from "../use_cases/GetLists";
 
 /**
  * Test Repository, move to better place
  */
-export class TestRepository implements CreateListRepositoryInterface {
-  lists: any[];
+export class TestRepository
+  implements CreateListRepositoryInterface, GetListsRepository
+{
+  lists: CreateListOutputInterface[];
 
   constructor() {
     this.lists = [];
   }
 
   // Helper functions to help with setting "dummy" data
-  setLists(lists: []) {
+  setLists(lists: CreateListOutputInterface[]) {
     this.lists = lists;
   }
 
@@ -33,6 +36,12 @@ export class TestRepository implements CreateListRepositoryInterface {
       id: this.lists.length.toString(),
       name: input.name,
       items: [],
+    };
+  }
+
+  getLists() {
+    return {
+      lists: this.lists,
     };
   }
 }
