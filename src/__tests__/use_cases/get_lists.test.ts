@@ -1,5 +1,5 @@
 import { GetListOutput, GetListsInteractor } from "../../use_cases/GetLists";
-import { TestRepository } from "../repository";
+import { TestRepository } from "../../repositories/repository";
 
 test("get saved lists", () => {
   expect(true).toBeTruthy();

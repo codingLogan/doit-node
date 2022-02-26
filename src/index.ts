@@ -1,8 +1,6 @@
-function printMsg() {
-  console.log("This is a message from the demo package");
-}
-
-import { ToDoList } from "./entities/ToDoList";
+import { CreateListInteractor } from "./use_cases/CreateList";
+import { GetListsInteractor } from "./use_cases/GetLists";
+import { TestRepository } from "./repositories/repository";
 
 // Public API
-export { printMsg, ToDoList };
+export { CreateListInteractor, GetListsInteractor, TestRepository };

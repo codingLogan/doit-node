@@ -1,4 +1,4 @@
-import { ToDoList } from "..";
+import { ToDoList } from "../entities/ToDoList";
 import { ToDoItem, ToDoItemInterface } from "../entities/ToDoItem";
 import { ToDoListInterface } from "../entities/ToDoList";
 
@@ -28,6 +28,7 @@ export class AddItemInteractor {
     this.list.addItem(new ToDoItem(this.data.newItemName));
     const output: AddItemOutputInterface = {
       list: {
+        id: this.list.id,
         name: this.list.name,
         items: this.list.items.map((item) => ({
           name: item.name,

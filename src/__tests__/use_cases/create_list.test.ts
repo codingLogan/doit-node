@@ -2,7 +2,7 @@ import {
   CreateListInputInterface,
   CreateListInteractor,
 } from "../../use_cases/CreateList";
-import { TestRepository } from "../repository";
+import { TestRepository } from "../../repositories/repository";
 
 test("CreateListInteractor creates a new blank list", () => {
   const repository = new TestRepository();
