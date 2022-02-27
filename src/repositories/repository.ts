@@ -3,6 +3,7 @@ import { ToDoListInterface } from "../use_cases/ToDoListInterface";
 import {
   AddItemOutputInterface,
   AddItemRepositoryInterface,
+  CreateItemInterface,
 } from "../use_cases/AddItem";
 import {
   CreateListInputInterface,
@@ -23,14 +24,23 @@ export class TestRepository
   private currentListId: number;
   lists: ToDoListInterface[];
 
+  private currentItemId: number;
+
   constructor() {
     this.currentListId = 0;
     this.lists = [];
+
+    this.currentItemId = 0;
   }
 
   getNextListId() {
     this.currentListId++;
     return this.currentListId.toString();
+  }
+
+  getNextItemId() {
+    this.currentItemId++;
+    return this.currentItemId;
   }
 
   // Helper functions to help with setting "dummy" data
@@ -56,17 +66,17 @@ export class TestRepository
     };
   }
 
-  addItemToList(
-    listId: string,
-    item: ToDoItemInterface
-  ): AddItemOutputInterface {
-    const list = this.lists.find((listEntry) => listEntry.id === listId);
+  addItemToList(item: CreateItemInterface): AddItemOutputInterface {
+    const list = this.lists.find((listEntry) => listEntry.id === item.listId);
 
     if (typeof list === "undefined") {
-      throw new Error(`List with id: ${listId} could not be found`);
+      throw new Error(`List with id: ${item.listId} could not be found`);
     }
 
-    list.items.push(item);
+    list.items.push({
+      ...item,
+      id: this.getNextItemId().toString(),
+    });
 
     return { list };
   }

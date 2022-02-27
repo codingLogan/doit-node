@@ -25,6 +25,8 @@ test("AddItemInteractor can add items to a list", () => {
       name: "testlist",
       items: [
         {
+          id: "1",
+          listId: "1",
           name: "hello",
           done: false,
         },
