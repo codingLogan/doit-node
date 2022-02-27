@@ -11,6 +11,10 @@ import {
   CreateListRepositoryInterface,
 } from "../use_cases/CreateList";
 import { GetListsRepository } from "../use_cases/GetLists";
+import {
+  MarkItemCompleteInput,
+  MarkItemCompleteRepository,
+} from "../use_cases/MarkItemAsComplete";
 
 /**
  * Test / In Memory Repository
@@ -19,7 +23,8 @@ export class TestRepository
   implements
     CreateListRepositoryInterface,
     GetListsRepository,
-    AddItemRepositoryInterface
+    AddItemRepositoryInterface,
+    MarkItemCompleteRepository
 {
   private currentListId: number;
   lists: ToDoListInterface[];
@@ -79,5 +84,24 @@ export class TestRepository
     });
 
     return { list };
+  }
+
+  markItemAsComplete(input: MarkItemCompleteInput) {
+    const list = this.lists.find((list) => list.id === input.listId);
+
+    if (!list) {
+      throw new Error("markItemAsComlete: List not found");
+    }
+
+    const listItem = list.items.find((item) => item.id === input.itemId);
+
+    if (!listItem) {
+      throw new Error("markItemAsComplete: Item not found");
+    }
+
+    // Using reference, kinda risky
+    listItem.done = true;
+
+    return listItem;
   }
 }

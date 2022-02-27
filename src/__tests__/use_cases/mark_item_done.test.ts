@@ -1,5 +1,7 @@
 import { ToDoItem } from "../../entities/ToDoItem";
 import { ToDoItemInterface } from "../../use_cases/ToDoItemInterface";
+import { TestRepository } from "../../repositories/repository";
+import { MarkItemCompleteInteractor } from "../../use_cases/MarkItemAsComplete";
 
 test("Mark item as done", () => {
   const toDoItem = new ToDoItem("chores");
@@ -7,20 +9,44 @@ test("Mark item as done", () => {
   expect(toDoItem.isDone()).toBe(true);
 });
 
-// test("Mark item as done in repository", () => {
-//   const input = {
-//     listId: "1",
-//     itemId: "1",
-//   };
+test("Mark item as done in repository", () => {
+  const input = {
+    listId: "1",
+    itemId: "1",
+  };
 
-//   const output: ToDoItemInterface = {
-//     name: "testname",
-//     done: true,
-//     id: "1",
-//   };
+  const output: ToDoItemInterface = {
+    name: "hello1",
+    done: true,
+    id: "1",
+    listId: "1",
+  };
 
-//   const interactor = new MarkItemAsDoneInteractor(repo);
-//   const actual = interactor.markItemAsDone(input);
+  // Setup the test repo with a list and two items
+  const repo = new TestRepository();
+  repo.setLists([
+    {
+      id: "1",
+      name: "testlist",
+      items: [
+        {
+          id: "1",
+          listId: "1",
+          name: "hello1",
+          done: false,
+        },
+        {
+          id: "2",
+          listId: "1",
+          name: "hello2",
+          done: false,
+        },
+      ],
+    },
+  ]);
 
-//   expect(actual).toStrictEqual(output);
-// });
+  const interactor = new MarkItemCompleteInteractor(repo);
+  const actual = interactor.execute(input);
+
+  expect(actual).toStrictEqual(output);
+});
