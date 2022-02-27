@@ -1,10 +1,4 @@
-import { ToDoItem, ToDoItemInterface } from "./ToDoItem";
-
-export interface ToDoListInterface {
-  id: string | null;
-  name: string;
-  items: ToDoItemInterface[];
-}
+import { ToDoItem } from "./ToDoItem";
 
 export class ToDoList {
   id: string | null;

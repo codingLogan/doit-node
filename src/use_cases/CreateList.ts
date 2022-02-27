@@ -1,4 +1,4 @@
-import { ToDoItemInterface } from "../entities/ToDoItem";
+import { ToDoItemInterface } from "../use_cases/ToDoItemInterface";
 import { ToDoList } from "../entities/ToDoList";
 
 /**
@@ -13,7 +13,7 @@ export interface CreateListInputInterface {
  * Upon creation it will be a named list, and an empty array of items
  */
 export interface CreateListOutputInterface {
-  id: string | null;
+  id: string;
   name: string;
   items: ToDoItemInterface[];
 }

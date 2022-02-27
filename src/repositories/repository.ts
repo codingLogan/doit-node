@@ -1,5 +1,5 @@
-import { ToDoItemInterface } from "../entities/ToDoItem";
-import { ToDoListInterface } from "../entities/ToDoList";
+import { ToDoItemInterface } from "../use_cases/ToDoItemInterface";
+import { ToDoListInterface } from "../use_cases/ToDoListInterface";
 import {
   AddItemOutputInterface,
   AddItemRepositoryInterface,
@@ -20,10 +20,17 @@ export class TestRepository
     GetListsRepository,
     AddItemRepositoryInterface
 {
+  private currentListId: number;
   lists: ToDoListInterface[];
 
   constructor() {
+    this.currentListId = 0;
     this.lists = [];
+  }
+
+  getNextListId() {
+    this.currentListId++;
+    return this.currentListId.toString();
   }
 
   // Helper functions to help with setting "dummy" data
@@ -33,19 +40,14 @@ export class TestRepository
 
   createList(input: CreateListInputInterface): CreateListOutputInterface {
     const newList: ToDoListInterface = {
-      id: null,
+      id: this.getNextListId(),
       name: input.name,
       items: [],
     };
 
     this.lists.push(newList);
-    newList.id = this.lists.length.toString();
 
-    return {
-      id: this.lists.length.toString(),
-      name: input.name,
-      items: [],
-    };
+    return newList;
   }
 
   getLists() {

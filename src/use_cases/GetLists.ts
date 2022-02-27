@@ -1,7 +1,7 @@
-import { ToDoListInterface } from "../entities/ToDoList";
+import { ToDoListInterface } from "../use_cases/ToDoListInterface";
 
 export interface GetListOutput {
-  id: string | null;
+  id: string;
   name: string;
   items: [];
 }

@@ -1,11 +1,7 @@
-import { ToDoList } from "../entities/ToDoList";
-import { ToDoItem, ToDoItemInterface } from "../entities/ToDoItem";
-import { ToDoListInterface } from "../entities/ToDoList";
+import { ToDoItem } from "../entities/ToDoItem";
+import { ToDoItemInterface } from "../use_cases/ToDoItemInterface";
+import { ToDoListInterface } from "../use_cases/ToDoListInterface";
 
-// TODO: something feels wrong about this
-// Wasteful to send a full list and items
-// just to add more items to it?
-// Consider providing an ID for the list instead?
 export interface AddItemInputInterface {
   listID: string;
   newItemName: string;

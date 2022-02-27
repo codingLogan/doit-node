@@ -1,4 +1,5 @@
-import { ToDoItem, ToDoItemInterface } from "../../entities/ToDoItem";
+import { ToDoItem } from "../../entities/ToDoItem";
+import { ToDoItemInterface } from "../../use_cases/ToDoItemInterface";
 
 test("Mark item as done", () => {
   const toDoItem = new ToDoItem("chores");
