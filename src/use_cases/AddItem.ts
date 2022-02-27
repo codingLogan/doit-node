@@ -7,7 +7,7 @@ import { ToDoListInterface } from "../entities/ToDoList";
 // just to add more items to it?
 // Consider providing an ID for the list instead?
 export interface AddItemInputInterface {
-  list: ToDoListInterface;
+  listID: string;
   newItemName: string;
 }
 
@@ -15,27 +15,29 @@ export interface AddItemOutputInterface {
   list: ToDoListInterface;
 }
 
-export class AddItemInteractor {
-  data: AddItemInputInterface;
-  list: ToDoList;
+export interface AddItemRepositoryInterface {
+  addItemToList(
+    listId: string,
+    item: ToDoItemInterface
+  ): AddItemOutputInterface;
+}
 
-  constructor(data: AddItemInputInterface) {
-    this.data = data;
-    this.list = new ToDoList(data.list.name);
+export class AddItemInteractor {
+  repo;
+  constructor(repository: AddItemRepositoryInterface) {
+    this.repo = repository;
   }
 
-  addItem() {
-    this.list.addItem(new ToDoItem(this.data.newItemName));
-    const output: AddItemOutputInterface = {
-      list: {
-        id: this.list.id,
-        name: this.list.name,
-        items: this.list.items.map((item) => ({
-          name: item.name,
-          done: item.isDone(),
-        })),
-      },
-    };
-    return output;
+  addItem(input: AddItemInputInterface) {
+    // Create the item to make sure it's valid
+    const newItem = new ToDoItem(input.newItemName);
+
+    // Now that the item creation was successful, lets get the list
+    // that it should be added to, and then add it
+    const updatedList = this.repo.addItemToList(input.listID, {
+      name: newItem.name,
+      done: newItem.isDone(),
+    });
+    return updatedList;
   }
 }

@@ -1,3 +1,8 @@
+import { ToDoItemInterface } from "../entities/ToDoItem";
+import {
+  AddItemOutputInterface,
+  AddItemRepositoryInterface,
+} from "../use_cases/AddItem";
 import {
   CreateListInputInterface,
   CreateListOutputInterface,
@@ -6,10 +11,13 @@ import {
 import { GetListsRepository } from "../use_cases/GetLists";
 
 /**
- * Test Repository, move to better place
+ * Test / In Memory Repository
  */
 export class TestRepository
-  implements CreateListRepositoryInterface, GetListsRepository
+  implements
+    CreateListRepositoryInterface,
+    GetListsRepository,
+    AddItemRepositoryInterface
 {
   lists: CreateListOutputInterface[];
 
@@ -43,5 +51,20 @@ export class TestRepository
     return {
       lists: this.lists,
     };
+  }
+
+  addItemToList(
+    listId: string,
+    item: ToDoItemInterface
+  ): AddItemOutputInterface {
+    const list = this.lists.find((listEntry) => listEntry.id === listId);
+
+    if (typeof list === "undefined") {
+      throw new Error(`List with id: ${listId} could not be found`);
+    }
+
+    list.items.push(item);
+
+    return { list };
   }
 }

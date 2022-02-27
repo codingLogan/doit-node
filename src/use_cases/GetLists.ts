@@ -1,3 +1,5 @@
+import { ToDoListInterface } from "../entities/ToDoList";
+
 export interface GetListOutput {
   id: string | null;
   name: string;
@@ -5,7 +7,7 @@ export interface GetListOutput {
 }
 
 export interface GetListsOutput {
-  lists: GetListOutput[];
+  lists: ToDoListInterface[];
 }
 
 export interface GetListsRepository {
