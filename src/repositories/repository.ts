@@ -12,9 +12,9 @@ import {
 } from "../use_cases/CreateList";
 import { GetListsRepository } from "../use_cases/GetLists";
 import {
-  MarkItemCompleteInput,
-  MarkItemCompleteRepository,
-} from "../use_cases/MarkItemAsComplete";
+  CompleteItemInput,
+  CompleteItemRepository,
+} from "../use_cases/CompleteItem";
 
 /**
  * Test / In Memory Repository
@@ -24,7 +24,7 @@ export class TestRepository
     CreateListRepositoryInterface,
     GetListsRepository,
     AddItemRepositoryInterface,
-    MarkItemCompleteRepository
+    CompleteItemRepository
 {
   private currentListId: number;
   lists: ToDoListInterface[];
@@ -86,7 +86,7 @@ export class TestRepository
     return { list };
   }
 
-  markItemAsComplete(input: MarkItemCompleteInput) {
+  completeItem(input: CompleteItemInput) {
     const list = this.lists.find((list) => list.id === input.listId);
 
     if (!list) {
@@ -96,7 +96,7 @@ export class TestRepository
     const listItem = list.items.find((item) => item.id === input.itemId);
 
     if (!listItem) {
-      throw new Error("markItemAsComplete: Item not found");
+      throw new Error("completeItem: Item not found");
     }
 
     // Using reference, kinda risky

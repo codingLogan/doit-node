@@ -1,7 +1,7 @@
 import { ToDoItem } from "../../entities/ToDoItem";
 import { ToDoItemInterface } from "../../use_cases/ToDoItemInterface";
 import { TestRepository } from "../../repositories/repository";
-import { MarkItemCompleteInteractor } from "../../use_cases/MarkItemAsComplete";
+import { CompleteItemInteractor } from "../../use_cases/CompleteItem";
 
 test("Mark item as done", () => {
   const toDoItem = new ToDoItem("chores");
@@ -45,7 +45,7 @@ test("Mark item as done in repository", () => {
     },
   ]);
 
-  const interactor = new MarkItemCompleteInteractor(repo);
+  const interactor = new CompleteItemInteractor(repo);
   const actual = interactor.execute(input);
 
   expect(actual).toStrictEqual(output);
