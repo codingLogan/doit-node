@@ -1,4 +1,5 @@
 import { ToDoItemInterface } from "../entities/ToDoItem";
+import { ToDoListInterface } from "../entities/ToDoList";
 import {
   AddItemOutputInterface,
   AddItemRepositoryInterface,
@@ -19,19 +20,19 @@ export class TestRepository
     GetListsRepository,
     AddItemRepositoryInterface
 {
-  lists: CreateListOutputInterface[];
+  lists: ToDoListInterface[];
 
   constructor() {
     this.lists = [];
   }
 
   // Helper functions to help with setting "dummy" data
-  setLists(lists: CreateListOutputInterface[]) {
+  setLists(lists: ToDoListInterface[]) {
     this.lists = lists;
   }
 
   createList(input: CreateListInputInterface): CreateListOutputInterface {
-    const newList: CreateListOutputInterface = {
+    const newList: ToDoListInterface = {
       id: null,
       name: input.name,
       items: [],
