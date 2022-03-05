@@ -16,6 +16,7 @@ import {
   CompleteItemRepository,
 } from "../use_cases/CompleteItem";
 import { DeleteListRepository } from "../use_cases/DeleteList";
+import { DeleteItemRepository } from "../use_cases/DeleteItem";
 
 /**
  * Test / In Memory Repository
@@ -26,7 +27,8 @@ export class TestRepository
     GetListsRepository,
     DeleteListRepository,
     AddItemRepositoryInterface,
-    CompleteItemRepository
+    CompleteItemRepository,
+    DeleteItemRepository
 {
   private currentListId: number;
   lists: ToDoListInterface[];
@@ -117,5 +119,25 @@ export class TestRepository
     listItem.done = true;
 
     return listItem;
+  }
+
+  deleteItem(listId: string, itemId: string): Boolean {
+    const list = this.lists.find((list) => list.id === listId);
+
+    if (typeof list === "undefined") {
+      return false;
+    }
+
+    // Find the item in the list
+    const itemIndex = list.items.findIndex((item) => item.id === itemId);
+
+    if (itemIndex === -1) {
+      return false;
+    }
+
+    // Remove the item from the list
+    list.items.splice(itemIndex, 1);
+
+    return true;
   }
 }
