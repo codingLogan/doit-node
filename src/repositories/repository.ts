@@ -15,6 +15,7 @@ import {
   CompleteItemInput,
   CompleteItemRepository,
 } from "../use_cases/CompleteItem";
+import { DeleteListRepository } from "../use_cases/DeleteList";
 
 /**
  * Test / In Memory Repository
@@ -23,6 +24,7 @@ export class TestRepository
   implements
     CreateListRepositoryInterface,
     GetListsRepository,
+    DeleteListRepository,
     AddItemRepositoryInterface,
     CompleteItemRepository
 {
@@ -69,6 +71,18 @@ export class TestRepository
     return {
       lists: this.lists,
     };
+  }
+
+  deleteList(id: string): Boolean {
+    const listIndex = this.lists.findIndex((list) => list.id === id);
+
+    if (listIndex === -1) {
+      return false;
+    }
+
+    // Remove the list from the array
+    this.lists.splice(listIndex, 1);
+    return true;
   }
 
   addItemToList(item: CreateItemInterface): AddItemOutputInterface {

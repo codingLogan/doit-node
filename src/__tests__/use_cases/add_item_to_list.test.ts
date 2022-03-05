@@ -1,4 +1,4 @@
-import { TestRepository } from "../../../lib";
+import { TestRepository } from "../../repositories/repository";
 import { ToDoItem } from "../../entities/ToDoItem";
 import { ToDoList } from "../../entities/ToDoList";
 import {
