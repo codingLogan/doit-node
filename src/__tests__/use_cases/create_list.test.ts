@@ -4,15 +4,20 @@ import {
 } from "../../use_cases/CreateList";
 import { TestRepository } from "../../repositories/repository";
 
-test("CreateListInteractor creates a new blank list", () => {
-  const repository = new TestRepository();
+let repository: TestRepository;
+let interactor: CreateListInteractor;
 
+beforeEach(() => {
+  repository = new TestRepository();
+  interactor = new CreateListInteractor(repository);
+});
+
+test("CreateListInteractor creates a new blank list", () => {
   const createInputDTO: CreateListInputInterface = {
     name: "testname",
   };
 
-  const createListInteractor = new CreateListInteractor(repository);
-  const createOutputDTO = createListInteractor.createList(createInputDTO);
+  const createOutputDTO = interactor.createList(createInputDTO);
 
   expect(createOutputDTO).toEqual({
     id: "1",
@@ -22,8 +27,5 @@ test("CreateListInteractor creates a new blank list", () => {
 });
 
 test("Blank list name does not create a list", () => {
-  const repository = new TestRepository();
-
-  const createListInteractor = new CreateListInteractor(repository);
-  expect(() => createListInteractor.createList({ name: "" })).toThrowError();
+  expect(() => interactor.createList({ name: "" })).toThrowError();
 });

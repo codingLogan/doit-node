@@ -1,9 +1,16 @@
 import { TestRepository } from "../../repositories/repository";
 import { DeleteItemInteractor } from "../../use_cases/DeleteItem";
 
+let repository: TestRepository;
+let interactor: DeleteItemInteractor;
+
+beforeEach(() => {
+  repository = new TestRepository();
+  interactor = new DeleteItemInteractor(repository);
+});
+
 test("item can be deleted", () => {
   // Setup test repository
-  const repository = new TestRepository();
   repository.setLists([
     {
       id: "1",
@@ -25,7 +32,6 @@ test("item can be deleted", () => {
     },
   ]);
 
-  const interactor = new DeleteItemInteractor(repository);
   const listId = "1";
   const itemId = "1";
   const actual = interactor.deleteItemFromList(listId, itemId);
